@@ -4,8 +4,8 @@ rule Linux_Ransomware_AES_GCM_SelfDelete
 {
     meta:
         description = "Deteksi ransomware Linux dengan AES-128-GCM dan self-delete"
-        author = "Security Analyst"
-        date = "2024-12-31"
+        author = "Pacarnya Waguri"
+        date = "2025-01-01"
         severity = "critical"
         malware_type = "Ransomware"
         target_os = "Linux"
