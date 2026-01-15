@@ -1,15 +1,13 @@
-Berikut adalah penyelesaian untuk **Soal 1**, **Soal 2**, dan **Soal 3** berdasarkan dokumen *Responsi Praktikum Pemrograman Python TK02.pdf* yang kamu unggah.
+Baik, berikut adalah kode lengkap untuk **Soal 1, 2, dan 3** yang menggunakan struktur OOP dengan blok `if __name__ == "__main__":` sebagai entry point (titik masuk) program.
 
----
+Struktur ini adalah standar yang baik (best practice) dalam pemrograman Python, menjaga agar definisi Class terpisah dari kode eksekusi utama.
 
-### **Soal 1: Class Book**
-
-Membuat class `Book` dengan atribut yang ditentukan, method `view`, dan 4 objek contoh .
+### 1. Soal 1: Class Book
 
 ```python
 class Book:
     def __init__(self, isbn, title, author, publisher, pages, price):
-        # [cite_start]Instance attributes [cite: 125-132]
+        # [cite_start]Instance attribute [cite: 125-132]
         self.isbn = isbn
         self.title = title
         self.author = author
@@ -18,8 +16,8 @@ class Book:
         self.price = price
 
     def view(self):
-        # [cite_start]Method untuk menampilkan semua data [cite: 133-134]
-        print("=== Book Details ===")
+        # [cite_start]Method view menampilkan data [cite: 133-134]
+        print("=== Detail Buku ===")
         print(f"ISBN      : {self.isbn}")
         print(f"Title     : {self.title}")
         print(f"Author    : {self.author}")
@@ -28,167 +26,174 @@ class Book:
         print(f"Price     : Rp {self.price:,}")
         print()
 
-# [cite_start]Membuat 4 buah objek [cite: 135]
-buku1 = Book("978-1", "Python Dasar", "Budi Santoso", "Informatika", 200, 50000)
-buku2 = Book("978-2", "Algoritma", "Rina Wati", "Andi Offset", 350, 75000)
-buku3 = Book("978-3", "AI Modern", "Joko Anwar", "Elex Media", 500, 120000)
-buku4 = Book("978-4", "Data Science", "Siti Aminah", "Salemba", 420, 95000)
+# --- Entry Point ---
+if __name__ == "__main__":
+    # [cite_start]Membuat 4 buah objek [cite: 135]
+    buku1 = Book("978-602-03", "Dilan 1990", "Pidi Baiq", "Pastel Books", 330, 79000)
+    buku2 = Book("978-979-22", "Laskar Pelangi", "Andrea Hirata", "Bentang", 529, 85000)
+    buku3 = Book("978-006-24", "Hidden Figures", "Margot Lee", "HarperCollins", 368, 150000)
+    buku4 = Book("978-144-93", "Fluent Python", "Luciano Ramalho", "O'Reilly", 792, 650000)
 
-# Menjalankan method view
-buku1.view()
-buku2.view()
-buku3.view()
-buku4.view()
+    # Menjalankan method view
+    buku1.view()
+    buku2.view()
+    buku3.view()
+    buku4.view()
 
 ```
 
 ---
 
-### **Soal 2: Class SegitigaSikuSiku**
-
-Menggunakan konsep *encapsulation* (private attribute), *decorator* `@property` untuk accessor & mutator, serta validasi error `ValueError` .
+### 2. Soal 2: Class Segitiga Siku-Siku (Encapsulation)
 
 ```python
 import math
 
 class SegitigaSikuSiku:
     def __init__(self, alas, tinggi):
-        # Inisialisasi menggunakan setter untuk validasi otomatis
+        # Menggunakan setter untuk inisialisasi agar tervalidasi
         self.alas = alas
         self.tinggi = tinggi
 
-    # --- Property Alas ---
+    # [cite_start]Accessor & Mutator untuk Alas [cite: 138, 140-143]
     @property
     def alas(self):
-        [cite_start]return self._alas  # Accessor [cite: 138]
+        return self._alas
 
     @alas.setter
     def alas(self, value):
-        # [cite_start]Mutator dengan validasi [cite: 142]
         if value > 0:
             self._alas = value
         else:
             raise ValueError("Nilai alas dan tinggi harus positif")
 
-    # --- Property Tinggi ---
+    # [cite_start]Accessor & Mutator untuk Tinggi [cite: 139, 140-143]
     @property
     def tinggi(self):
-        [cite_start]return self._tinggi # Accessor [cite: 139]
+        return self._tinggi
 
     @tinggi.setter
     def tinggi(self, value):
-        # [cite_start]Mutator dengan validasi [cite: 142]
         if value > 0:
             self._tinggi = value
         else:
             raise ValueError("Nilai alas dan tinggi harus positif")
 
-    # --- Accessor Hipotenusa & Keliling ---
+    # [cite_start]Accessor Hipotenusa [cite: 144]
     @property
     def hipotenusa(self):
-        # [cite_start]Rumus sqrt((alas**2) + (tinggi**2)) [cite: 144]
         return math.sqrt((self.alas ** 2) + (self.tinggi ** 2))
 
+    # [cite_start]Accessor Keliling [cite: 144]
     @property
     def keliling(self):
-        # [cite_start]Rumus alas + tinggi + hipotenusa [cite: 144]
         return self.alas + self.tinggi + self.hipotenusa
 
-    # --- Method Luas ---
+    # [cite_start]Method Luas [cite: 145]
     def luas(self):
-        # [cite_start]Rumus 0.5 * alas * tinggi [cite: 145]
         return 0.5 * self.alas * self.tinggi
 
     def view(self):
-        # [cite_start]Output menampilkan nilai [cite: 146-151]
+        # [cite_start]Menampilkan output sesuai format [cite: 146-151]
         print(f"Alas       : {self.alas}")
         print(f"Tinggi     : {self.tinggi}")
         print(f"Hipotenusa : {self.hipotenusa:.2f}")
         print(f"Keliling   : {self.keliling:.2f}")
         print(f"Luas       : {self.luas():.2f}")
-        print("-" * 20)
+        print("-" * 25)
 
-# Contoh Penggunaan
-try:
-    segitiga1 = SegitigaSikuSiku(3, 4)
-    segitiga1.view()
+# --- Entry Point ---
+if __name__ == "__main__":
+    print("=== Soal 2: Segitiga Siku-Siku ===")
+    try:
+        # Objek 1: Valid
+        segitiga1 = SegitigaSikuSiku(3, 4)
+        segitiga1.view()
 
-    segitiga2 = SegitigaSikuSiku(5, 12)
-    segitiga2.view()
-    
-    # Contoh Error (akan mentrigger ValueError)
-    # segitiga_error = SegitigaSikuSiku(-5, 10) 
-except ValueError as e:
-    print(f"Error: {e}")
+        # Objek 2: Valid
+        segitiga2 = SegitigaSikuSiku(5, 12)
+        segitiga2.view()
+
+        # Objek 3: Error Test (Uncomment baris bawah untuk tes error)
+        # segitiga_error = SegitigaSikuSiku(-5, 10) 
+
+    except ValueError as e:
+        print(f"Terjadi Kesalahan: {e}")
 
 ```
 
 ---
 
-### **Soal 3: Logic Program (Smart Controller)**
-
-Menerjemahkan tabel logika Suhu dan Kebisingan menjadi program OOP .
+### 3. Soal 3: Logic Program (Controller)
 
 ```python
 class RoomController:
     def __init__(self, suhu, intensitas_suara):
-        # [cite_start]Nilai dimasukkan melalui constructor [cite: 159]
+        # [cite_start]Constructor menerima input [cite: 159]
         self.suhu = suhu
         self.intensitas_suara = intensitas_suara
 
     def calculate(self):
-        # [cite_start]Menentukan Status Suhu [cite: 155]
+        [cite_start]# [cite: 160] Method calculate()
+        
+        # [cite_start]1. Menentukan Status Suhu [cite: 155]
         if self.suhu < 18:
             status_suhu = "Dingin"
         elif 18 <= self.suhu <= 30:
             status_suhu = "Normal"
-        else: # > 30
+        else:
             status_suhu = "Panas"
 
-        # [cite_start]Menentukan Status Kebisingan [cite: 155]
+        # [cite_start]2. Menentukan Status Kebisingan [cite: 155]
         if self.intensitas_suara < 40:
             status_bising = "Tenang"
         elif 40 <= self.intensitas_suara <= 60:
             status_bising = "Normal"
-        else: # > 60
+        else:
             status_bising = "Berisik"
 
-        # [cite_start]Menentukan Status Ventilasi berdasarkan Tabel [cite: 155-156]
-        # Logic Ventilasi "On":
-        # 1. (Dingin) AND (Normal atau Berisik)
-        # 2. (Normal) AND (Berisik)
-        # 3. (Panas) -> Selalu On
-        
-        status_ventilasi = "Off" # Default Off
+        # [cite_start]3. Menentukan Status Ventilasi berdasarkan Logika Tabel [cite: 155-156]
+        status_ventilasi = "Off"  # Default
 
         if status_suhu == "Dingin":
+            # Dingin: On jika >= 40 (Normal/Berisik)
             if status_bising in ["Normal", "Berisik"]:
                 status_ventilasi = "On"
+        
         elif status_suhu == "Normal":
+            # Normal: On hanya jika Berisik (>60)
             if status_bising == "Berisik":
                 status_ventilasi = "On"
+        
         elif status_suhu == "Panas":
-             status_ventilasi = "On"
+            # Panas: Selalu On (>30 derajat)
+            status_ventilasi = "On"
 
-        # Menampilkan Output
-        print(f"Input: Suhu={self.suhu}, Suara={self.intensitas_suara}")
-        print(f"-> Status Suhu      : {status_suhu}")
-        print(f"-> Status Kebisingan: {status_bising}")
-        print(f"-> Status Ventilasi : {status_ventilasi}")
+        # Output Hasil
+        print(f"Input -> Suhu: {self.suhu}, Suara: {self.intensitas_suara}")
+        print(f"  Status Suhu      : {status_suhu}")
+        print(f"  Status Kebisingan: {status_bising}")
+        print(f"  Status Ventilasi : {status_ventilasi}")
         print("-" * 30)
 
-# [cite_start]Test Cases sesuai tabel [cite: 155-156]
-print("=== Soal 3 Output ===")
-kasus1 = RoomController(10, 30) # Dingin, Tenang -> Off
-kasus1.calculate()
+# --- Entry Point ---
+if __name__ == "__main__":
+    print("=== Soal 3: Room Controller ===")
+    
+    # Tes Kasus 1: Dingin, Tenang (<18, <40) -> Off
+    c1 = RoomController(16, 30)
+    c1.calculate()
 
-kasus2 = RoomController(10, 50) # Dingin, Normal -> On
-kasus2.calculate()
+    # Tes Kasus 2: Dingin, Normal (<18, 50) -> On
+    c2 = RoomController(16, 50)
+    c2.calculate()
 
-kasus3 = RoomController(25, 30) # Normal, Tenang -> Off
-kasus3.calculate()
+    # Tes Kasus 3: Normal, Normal (25, 50) -> Off
+    c3 = RoomController(25, 50)
+    c3.calculate()
 
-kasus4 = RoomController(35, 70) # Panas, Berisik -> On
-kasus4.calculate()
+    # Tes Kasus 4: Panas, Apapun (35, 30) -> On
+    c4 = RoomController(35, 30)
+    c4.calculate()
 
 ```
