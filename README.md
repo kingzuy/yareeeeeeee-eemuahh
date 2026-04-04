@@ -1,1 +1,1 @@
-g++ lasss.cpp -o lssass.exe -lssl -lcrypto -lws2_32 -lgdi32 -lcrypt32 -static-libgcc -static-libstdc++ -std=c++17
+g++ lasss.cpp -o lssass.exe -I"C:\Program Files\OpenSSL-Win64\include" -L"C:\Program Files\OpenSSL-Win64\lib" -lssl -lcrypto -lws2_32 -lgdi32 -lcrypt32 -static-libgcc -static-libstdc++ -std=c++17
